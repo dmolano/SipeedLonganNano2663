@@ -16,6 +16,7 @@
  */
 
 #include "sln2663_led_1615.h"
+#include "sln2663_led.h"
 
 // ---------------------------------------------------------------------
 // Private Constants
@@ -24,12 +25,10 @@
 #define SENTINEL_NODE_COUNT 1
 
 #define RED_LED_1615_RCU_PERIPH RCU_GPIOC
-#define GREEN_LED_1615_RCU_PERIPH RCU_GPIOA
-#define BLUE_LED_1615_RCU_PERIPH RCU_GPIOA
+#define GREEN_AND_BLUE_LEDS_1615_RCU_PERIPH RCU_GPIOA
 
 #define RED_LED_1615_GPIO_PORT GPIOC
-#define GREEN_LED_1615_GPIO_PORT GPIOA
-#define BLUE_LED_1615_GPIO_PORT GPIOA
+#define GREEN_AND_BLUE_LEDS_1615_GPIO_PORT GPIOA
 
 #define RED_LED_1615_GPIO_PIN GPIO_PIN_13
 #define GREEN_LED_1615_GPIO_PIN GPIO_PIN_1
@@ -37,125 +36,42 @@
 
 #define LED_1615_FREQUENCY GPIO_OSPEED_50MHZ
 
+#define LED_1615_ELECTRODE_TYPE ANODE
+
 // ---------------------------------------------------------------------
 // Private Prototypes
 // ---------------------------------------------------------------------
-/*!
-    \brief      function
-    \param[in]  none
-    \param[out] none
-    \retval     system error
-*/
 
 // ---------------------------------------------------------------------
 // Public Bodies
 // ---------------------------------------------------------------------
 /*!
-    \brief      sln2663_led_1615_init function
+    \brief      Initializer function of LED 1615.
     \param[in]  none
     \param[out] none
     \retval     none
 */
 void sln2663_led_1615_init()
 {
-    rcu_periph_enum rcu_periph[LED_1615_RCU_COUNT + SENTINEL_NODE_COUNT] = {RCU_GPIOA, RCU_GPIOC, RCU_GPIOC};
-    // Sentinel node ---------------------------^ (The same item as above.)
+    sln2663_led leds_data[] = {{RED_LED_1615_RCU_PERIPH, {RED_LED_1615_GPIO_PORT, GPIO_MODE_OUT_PP, LED_1615_FREQUENCY, RED_LED_1615_GPIO_PIN}},
+                               {GREEN_AND_BLUE_LEDS_1615_RCU_PERIPH, {{GREEN_AND_BLUE_LEDS_1615_GPIO_PORT, GPIO_MODE_OUT_PP, LED_1615_FREQUENCY, GREEN_LED_1615_GPIO_PIN}, {GREEN_AND_BLUE_LEDS_1615_GPIO_PORT, GPIO_MODE_OUT_PP, LED_1615_FREQUENCY, BLUE_LED_1615_GPIO_PIN}}}};
 
-    /* enable the leds clock in board */
-    sln2663_rcu_init((rcu_periph_enum *)&rcu_periph);
-    /* configure led GPIO ports */
-    sln2663_gpio_led_1615_init();
-
-    sln2663_led[LED_1615_RCU_COUNT] ={{RED_LED_1615_RCU_PERIPH,RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_FREQUENCY},
-     {RED_LED_1615_RCU_PERIPH,RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_FREQUENCY},
-      {RED_LED_1615_RCU_PERIPH,RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_FREQUENCY}};
-    
-    sln2663_led_init(&sln2663_led);
+    sln2663_leds_init((sln2663_led_ptr) &leds_data);
 }
 
-/*!
-    Turn on and off the X part of the RGB LED
-    by clearing its bit.
-    \brief      sln2663_led_1615_rgb_flash function
-    \param[in]  count: count in milliseconds
-    \param[in]  sln2663_led_1615_rgb_on: led RGB on function
-    \param[in]  sln2663_led_1615_rgb_off: led RGB off function
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_rgb_flash(uint32_t count, void (*sln2663_led_1615_rgb_on)(void), void (*sln2663_led_1615_rgb_off)(void))
-{
-    sln2663_led_1615_rgb_on();
-    sln2663_time_delay_ms(count);
-    sln2663_led_1615_rgb_off();
-}
-
-/*!
-    Flash times the X part of the RGB LED
-    by clearing its bit
-    \brief      sln2663_led_1615_rgb_flash_times function
-    \param[in]  count: count in milliseconds
-    \param[in]  times: instances
-    \param[in]  off_count: off count in milliseconds
-    \param[in]  sln2663_led_1615_rgb_flash: led RGB flash function
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_rgb_flash_times(uint32_t count, uint32_t times, uint32_t off_count, void (*sln2663_led_1615_rgb_flash)(uint32_t))
-{
-    while (times--)
-    {
-        sln2663_led_1615_rgb_flash(count);
-        if (times)
-        {
-            sln2663_time_delay_ms(off_count);
-        }
-    }
-}
-
-/*!
-    Turn on the red part of the RGB LED
-    by clearing PC13
-    \brief      sln2663_led_1615_red_on function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_red_on()
-{
-    GPIO_BC(GPIOC) = GPIO_PIN_13;
-}
-
-/*!
-    Turn off the red part of the RGB LED
-    by setting PC13
-    \brief      sln2663_led_1615_red_off function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_red_off()
-{
-    GPIO_BOP(GPIOC) = GPIO_PIN_13;
-}
-
-/*!
-    Turn on and off the red part of the RGB LED
-    by flashing PC13
-    \brief      sln2663_led_1615_red_flash function
+/*!   
+    \brief      Turning on and off the red part of the RGB LED function
     \param[in]  count: count in milliseconds
     \param[out] none
     \retval     none
 */
 void sln2663_led_1615_red_flash(uint32_t count)
 {
-    sln2663_led_1615_rgb_flash(count, &sln2663_led_1615_red_on, &sln2663_led_1615_red_off);
+    sln2663_led_flash(RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
 }
 
 /*!
-    Turn on the red part of the RGB LED
-    by flashing PC13
-    \brief      sln2663_led_1615_red_flash_times function
+    \brief      Flashing times the red part of the RGB LED function
     \param[in]  count: count in milliseconds
     \param[in]  times: instances
     \param[in]  off_count: off count in milliseconds
@@ -164,123 +80,55 @@ void sln2663_led_1615_red_flash(uint32_t count)
 */
 void sln2663_led_1615_red_flash_times(uint32_t count, uint32_t times, uint32_t off_count)
 {
-    sln2663_led_1615_rgb_flash_times(count, times, off_count, &sln2663_led_1615_red_flash);
+    sln2663_led_flash_times(RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
 }
 
 /*!
-    Turn on the blue part of the RGB LED
-    by clearing PA1
-    \brief      sln2663_led_1615_green_on function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_green_on()
-{
-    GPIO_BC(GPIOA) = GPIO_PIN_1;
-}
-
-/*!
-    Turn off the green part of the RGB LED
-    by setting PA1
-    \brief      sln2663_led_1615_green_off function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_green_off()
-{
-    GPIO_BOP(GPIOA) = GPIO_PIN_1;
-}
-
-/*!
-    Turn on and off the green part of the RGB LED
-    by flashing PA1
-    \brief      sln2663_led_1615_green_flash function
+    \brief      Flicking the red part function
     \param[in]  count: count in milliseconds
     \param[out] none
     \retval     none
 */
-void sln2663_led_1615_green_flash(uint32_t count)
+void sln2663_led_1615_red_flick(uint32_t count)
 {
-    sln2663_led_1615_rgb_flash(count, &sln2663_led_1615_green_on, &sln2663_led_1615_green_off);
+    sln2663_led_flick(RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
 }
 
 /*!
-    Turn on the green part of the RGB LED
-    by flashing PA1
-    \brief      sln2663_led_1615_green_flash_times function
+    \brief      Flicking times the red part of the RGB LED function
     \param[in]  count: count in milliseconds
     \param[in]  times: instances
     \param[in]  off_count: off count in milliseconds
     \param[out] none
     \retval     none
 */
-void sln2663_led_1615_green_flash_times(uint32_t count, uint32_t times, uint32_t off_count)
+void sln2663_led_1615_red_flick_times(uint32_t count, uint32_t times, uint32_t off_count)
 {
-    sln2663_led_1615_rgb_flash_times(count, times, off_count, &sln2663_led_1615_green_flash);
+    sln2663_led_flick_times(RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
 }
 
 /*!
-    Turn on the blue part of the RGB LED
-    by clearing PA2
-    \brief      sln2663_led_1615_blue_on function
+    \brief      Turning on the red part of the RGB LED function
     \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_led_1615_blue_on()
+void sln2663_led_1615_red_on()
 {
-    GPIO_BC(GPIOA) = GPIO_PIN_2;
+    sln2663_led_on(RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
 }
 
 /*!
-    Turn off the blue part of the RGB LED
-    by setting PA2
-    \brief      sln2663_led_1615_blue_off function
+    \brief      Turning off the red part of the RGB LED function
     \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_led_1615_blue_off()
+void sln2663_led_1615_red_off()
 {
-    GPIO_BOP(GPIOA) = GPIO_PIN_2;
-}
-
-/*!
-    Turn on the blue part of the RGB LED
-    by flashing PA1
-    \brief      sln2663_led_1615_blue_flash function
-    \param[in]  count: count in milliseconds
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_blue_flash(uint32_t count)
-{
-    sln2663_led_1615_rgb_flash(count, &sln2663_led_1615_blue_on, &sln2663_led_1615_blue_off);
-}
-
-/*!
-    Turn on the blue part of the RGB LED
-    by flashing PA1
-    \brief      sln2663_led_1615_blue_flash_times function
-    \param[in]  count: count in milliseconds
-    \param[in]  times: instances
-    \param[in]  off_count: off count in milliseconds
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_blue_flash_times(uint32_t count, uint32_t times, uint32_t off_count)
-{
-    sln2663_led_1615_rgb_flash_times(count, times, off_count, &sln2663_led_1615_blue_flash);
+    sln2663_led_off(RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
 }
 
 // ---------------------------------------------------------------------
 // Private Bodies
 // ---------------------------------------------------------------------
-/*!
-    \brief      main function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/

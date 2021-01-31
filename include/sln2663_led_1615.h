@@ -16,8 +16,6 @@
  */
 #include "gd32vf103.h"
 
-#include "sln2663_led.h"
-
 #ifndef __SLN2663_LED_1615_H
 #define __SLN2663_LED_1615_H
 
@@ -29,37 +27,15 @@
 // Public Prototypes
 // ---------------------------------------------------------------------
 /*!
-    \brief      sln2663_led_1615_init function
+    \brief      Initializer function of LED 1615.
     \param[in]  none
     \param[out] none
     \retval     none
 */
 void sln2663_led_1615_init();
 
-/*!
-    Turn on the red part of the RGB LED
-    by clearing PC13
-    \brief      sln2663_led_1615_red_on function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_red_on();
-
-/*!
-    Turn off the red part of the RGB LED
-    by setting PC13
-    \brief      sln2663_led_1615_red_off function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_red_off();
-
-/*!
-    Turn on and off the red part of the RGB LED
-    by flashing PC13
-    \brief      sln2663_led_1615_red_flash function
+/*!   
+    \brief      Turning on and off the red part of the RGB LED function
     \param[in]  count: count in milliseconds
     \param[out] none
     \retval     none
@@ -67,9 +43,7 @@ void sln2663_led_1615_red_off();
 void sln2663_led_1615_red_flash(uint32_t count);
 
 /*!
-    Turn on the red part of the RGB LED
-    by flashing PC13
-    \brief      sln2663_led_1615_red_flash_times function
+    \brief      Flashing times the red part of the RGB LED function
     \param[in]  count: count in milliseconds
     \param[in]  times: instances
     \param[in]  off_count: off count in milliseconds
@@ -79,87 +53,37 @@ void sln2663_led_1615_red_flash(uint32_t count);
 void sln2663_led_1615_red_flash_times(uint32_t count, uint32_t times, uint32_t off_count);
 
 /*!
-    Turn on the blue part of the RGB LED
-    by clearing PA1
-    \brief      sln2663_led_1615_green_on function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_green_on();
-
-/*!
-    Turn off the green part of the RGB LED
-    by setting PA1
-    \brief      sln2663_led_1615_green_off function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_green_off();
-
-/*!
-    Turn on and off the green part of the RGB LED
-    by flashing PA1
-    \brief      sln2663_led_1615_green_flash function
+    \brief      Flicking the red part function
     \param[in]  count: count in milliseconds
     \param[out] none
     \retval     none
 */
-void sln2663_led_1615_green_flash(uint32_t count);
+void sln2663_led_1615_red_flick(uint32_t count);
 
 /*!
-    Turn on the green part of the RGB LED
-    by flashing PA1
-    \brief      sln2663_led_1615_green_flash_times function
+    \brief      Flicking times the red part of the RGB LED function
     \param[in]  count: count in milliseconds
     \param[in]  times: instances
     \param[in]  off_count: off count in milliseconds
     \param[out] none
     \retval     none
 */
-void sln2663_led_1615_green_flash_times(uint32_t count, uint32_t times, uint32_t off_count);
+void sln2663_led_1615_red_flick_times(uint32_t count, uint32_t times, uint32_t off_count);
 
 /*!
-    Turn on the blue part of the RGB LED
-    by clearing PA2
-    \brief      sln2663_led_1615_blue_on function
+    \brief      Turning on the red part of the RGB LED function
     \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_led_1615_blue_on();
+void sln2663_led_1615_red_on();
 
 /*!
-    Turn off the blue part of the RGB LED
-    by setting PA2
-    \brief      sln2663_led_1615_blue_off function
+    \brief      Turning off the red part of the RGB LED function
     \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_led_1615_blue_off();
-
-/*!
-    Turn on the blue part of the RGB LED
-    by flashing PA1
-    \brief      sln2663_led_1615_blue_flash function
-    \param[in]  count: count in milliseconds
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_blue_flash(uint32_t count);
-
-/*!
-    Turn on the blue part of the RGB LED
-    by flashing PA1
-    \brief      sln2663_led_1615_blue_flash_times function
-    \param[in]  count: count in milliseconds
-    \param[in]  times: instances
-    \param[in]  off_count: off count in milliseconds
-    \param[out] none
-    \retval     none
-*/
-void sln2663_led_1615_blue_flash_times(uint32_t count, uint32_t times, uint32_t off_count);
+void sln2663_led_1615_red_off();
 
 #endif // __SLN2663_LED_1615_H

@@ -24,14 +24,28 @@
 // ---------------------------------------------------------------------
 
 // ---------------------------------------------------------------------
+// Public Structures
+// ---------------------------------------------------------------------
+/*!
+    \brief      GPIO info struct
+*/
+typedef struct
+{
+    uint32_t port;
+    uint32_t mode;
+    uint32_t frequency;
+    uint32_t pin;
+} sln2663_gpio, *sln2663_gpio_ptr;
+
+// ---------------------------------------------------------------------
 // Public Prototypes
 // ---------------------------------------------------------------------
 /*!
-    \brief      GPIO initialization function on the board's LEDs (LED_1615).
-    \param[in]  none
+    \brief      GPIOs initialization function.
+    \param[in]  gpios_ptr
     \param[out] none
     \retval     none
 */
-void sln2663_gpio_led_1615_init();
+void sln2663_gpios_init(sln2663_gpio_ptr gpios_ptr);
 
 #endif // __SLN2663_GPIO_H
