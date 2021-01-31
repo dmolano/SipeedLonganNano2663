@@ -1,5 +1,5 @@
 /* 
- * This file is part of the Sipeed Longan Nano Skeleton. Reset and clock unit (RCU).
+ * This file is part of the Sipeed Longan Nano 2663 Skeleton.
  * Copyright (c) 2021 Dionisio Molano Robledo.
  * 
  * This program is free software: you can redistribute it and/or modify  
@@ -16,32 +16,37 @@
  */
 #include "gd32vf103.h"
 
-#ifndef __SLN2663_RCU_H
-#define __SLN2663_RCU_H
+#ifndef __SLN2663_LED_H
+#define __SLN2663_LED_H
 
 // ---------------------------------------------------------------------
 // Public Constants
 // ---------------------------------------------------------------------
 
 // ---------------------------------------------------------------------
+// Public Structures
+// ---------------------------------------------------------------------
+/*!
+    \brief      LED info struct
+*/
+typedef struct
+{
+    rcu_periph_enum periph;
+    uint32_t port;
+    uint32_t pin;
+    uint32_t frequency;
+} sln2663_led, *sln2663_led_ptr;
+
+// ---------------------------------------------------------------------
 // Public Prototypes
 // ---------------------------------------------------------------------
-
 /*!
-    \brief      RCUs initialization function.
-    \param[in]  Pointer to a non-repeating list of rcu_periph_enum.
-                The list will end when two contiguous items are repeated.
+    \brief      sln2663_led_init function
+    \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_rcus_init(rcu_periph_enum *rcu_periph);
+void sln2663_led_init(sln2663_led_ptr sln2663_leds_data);
 
-/*!
-    \brief      RCU initialization function.
-    \param[in]  Pointer to a rcu_periph_enum.
-    \param[out] none
-    \retval     none
-*/
-void sln2663_rcu_init(rcu_periph_enum rcu_periph);
 
-#endif // __SLN2663_RCU_H
+#endif // __SLN2663_LED_H

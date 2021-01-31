@@ -22,7 +22,7 @@
 // ---------------------------------------------------------------------
 
 // ---------------------------------------------------------------------
-// Bodies
+// Public Bodies
 // ---------------------------------------------------------------------
 /*!
     \brief      RCUs initialization function.
@@ -31,17 +31,28 @@
     \param[out] none
     \retval     none
 */
-void sln2663_rcu_init(rcu_periph_enum *rcu_periph)
+void sln2663_rcus_init(rcu_periph_enum *rcu_periph_ptr)
 {
-    if (rcu_periph != NULL)
+    if (rcu_periph_ptr != NULL)
     {
         rcu_periph_enum sentinel_node;
 
         do
         {
-            sentinel_node = *rcu_periph;
-            rcu_periph_clock_enable(*rcu_periph);
-            rcu_periph++;
-        } while (*rcu_periph != sentinel_node);
+            sentinel_node = *rcu_periph_ptr;
+            rcu_periph_clock_enable(*rcu_periph_ptr);
+            rcu_periph_ptr++;
+        } while (*rcu_periph_ptr != sentinel_node);
     }
+}
+
+/*!
+    \brief      RCUs initialization function.
+    \param[in]  Pointer to a rcu_periph_enum.
+    \param[out] none
+    \retval     none
+*/
+void sln2663_rcu_init(rcu_periph_enum rcu_periph)
+{
+    rcu_periph_clock_enable(rcu_periph);
 }

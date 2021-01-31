@@ -1,5 +1,5 @@
 /* 
- * This file is part of the Sipeed Longan Nano Skeleton. Reset and clock unit (RCU).
+ * This file is part of the Sipeed Longan Nano 2663 Skeleton.
  * Copyright (c) 2021 Dionisio Molano Robledo.
  * 
  * This program is free software: you can redistribute it and/or modify  
@@ -14,34 +14,49 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "gd32vf103.h"
 
-#ifndef __SLN2663_RCU_H
-#define __SLN2663_RCU_H
+#include "sln2663_led.h"
 
-// ---------------------------------------------------------------------
-// Public Constants
-// ---------------------------------------------------------------------
+#include "sln2663_rcu.h"
 
 // ---------------------------------------------------------------------
-// Public Prototypes
+// Private Constants
 // ---------------------------------------------------------------------
 
+// ---------------------------------------------------------------------
+// Private Prototypes
+// ---------------------------------------------------------------------
 /*!
-    \brief      RCUs initialization function.
-    \param[in]  Pointer to a non-repeating list of rcu_periph_enum.
-                The list will end when two contiguous items are repeated.
+    \brief      function
+    \param[in]  none
+    \param[out] none
+    \retval     system error
+*/
+
+// ---------------------------------------------------------------------
+// Public Bodies
+// ---------------------------------------------------------------------
+/*!
+    \brief      sln2663_led_init function
+    \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_rcus_init(rcu_periph_enum *rcu_periph);
+void sln2663_led_init(sln2663_led_ptr sln2663_leds_data) {
+    while(sln2663_leds_data != NULL) {
+        if (sln2663_leds_data->periph != NULL) {
+            sln2663_rcu_init(sln2663_leds_data->periph);
+        }
+        sln2663_gpio_led_init(sln2663_leds_data->port, sln2663_leds_data->pin, sln2663_leds_data->frequency);
+    }
+}
 
+// ---------------------------------------------------------------------
+// Private Bodies
+// ---------------------------------------------------------------------
 /*!
-    \brief      RCU initialization function.
-    \param[in]  Pointer to a rcu_periph_enum.
+    \brief      main function
+    \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_rcu_init(rcu_periph_enum rcu_periph);
-
-#endif // __SLN2663_RCU_H

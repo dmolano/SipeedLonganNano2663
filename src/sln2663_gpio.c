@@ -22,13 +22,6 @@
 // ---------------------------------------------------------------------
 // Private Constants
 // ---------------------------------------------------------------------
-#define RED_LED_1615_GPIO_PIN GPIO_PIN_13
-#define GREEN_LED_1615_GPIO_PIN GPIO_PIN_1
-#define BLUE_LED_1615_GPIO_PIN GPIO_PIN_2
-
-#define RED_LED_1615_GPIO_PORT GPIOC
-#define GREEN_LED_1615_GPIO_PORT GPIOA
-#define BLUE_LED_1615_GPIO_PORT GPIOA
 
 // ---------------------------------------------------------------------
 // Private Prototypes

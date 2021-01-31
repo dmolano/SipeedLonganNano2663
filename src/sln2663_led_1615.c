@@ -23,6 +23,19 @@
 #define LED_1615_RCU_COUNT 2
 #define SENTINEL_NODE_COUNT 1
 
+#define RED_LED_1615_RCU_PERIPH RCU_GPIOC
+#define GREEN_LED_1615_RCU_PERIPH RCU_GPIOA
+#define BLUE_LED_1615_RCU_PERIPH RCU_GPIOA
+
+#define RED_LED_1615_GPIO_PORT GPIOC
+#define GREEN_LED_1615_GPIO_PORT GPIOA
+#define BLUE_LED_1615_GPIO_PORT GPIOA
+
+#define RED_LED_1615_GPIO_PIN GPIO_PIN_13
+#define GREEN_LED_1615_GPIO_PIN GPIO_PIN_1
+#define BLUE_LED_1615_GPIO_PIN GPIO_PIN_2
+
+#define LED_1615_FREQUENCY GPIO_OSPEED_50MHZ
 
 // ---------------------------------------------------------------------
 // Private Prototypes
@@ -52,6 +65,12 @@ void sln2663_led_1615_init()
     sln2663_rcu_init((rcu_periph_enum *)&rcu_periph);
     /* configure led GPIO ports */
     sln2663_gpio_led_1615_init();
+
+    sln2663_led[LED_1615_RCU_COUNT] ={{RED_LED_1615_RCU_PERIPH,RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_FREQUENCY},
+     {RED_LED_1615_RCU_PERIPH,RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_FREQUENCY},
+      {RED_LED_1615_RCU_PERIPH,RED_LED_1615_GPIO_PORT, RED_LED_1615_GPIO_PIN, LED_1615_FREQUENCY}};
+    
+    sln2663_led_init(&sln2663_led);
 }
 
 /*!

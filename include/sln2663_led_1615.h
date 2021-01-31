@@ -16,9 +16,7 @@
  */
 #include "gd32vf103.h"
 
-#include "sln2663_rcu.h"
-#include "sln2663_gpio.h"
-#include "sln2663_time.h"
+#include "sln2663_led.h"
 
 #ifndef __SLN2663_LED_1615_H
 #define __SLN2663_LED_1615_H
