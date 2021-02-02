@@ -34,12 +34,12 @@
     \param[out] none
     \retval     none
 */
-void sln2663_gpios_init(sln2663_gpio_ptr gpios_ptr)
+void sln2663_gpios_init(sln2663_gpio_ptr *gpios_ptr)
 {
-    while (gpios_ptr != NULL)
+    while (*gpios_ptr != NULL)
     {
-        gpio_init(gpios_ptr->port, gpios_ptr->mode, gpios_ptr->frequency, gpios_ptr->pin);
-        GPIO_BOP(gpios_ptr->port) = gpios_ptr->pin;
+        gpio_init((*gpios_ptr)->port, (*gpios_ptr)->mode, (*gpios_ptr)->frequency, (*gpios_ptr)->pin);
+        GPIO_BOP((*gpios_ptr)->port) = (*gpios_ptr)->pin;
         gpios_ptr++;
     }
 }

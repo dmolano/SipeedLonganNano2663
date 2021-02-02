@@ -26,13 +26,109 @@
 // ---------------------------------------------------------------------
 // Public Prototypes
 // ---------------------------------------------------------------------
+/*!   
+    \brief      Turning on and off the blue part of the RGB LED function
+    \param[in]  count: count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_blue_flash(uint32_t count);
+
 /*!
-    \brief      Initializer function of LED 1615.
+    \brief      Flashing times the blue part of the RGB LED function
+    \param[in]  count: count in milliseconds
+    \param[in]  times: instances
+    \param[in]  off_count: off count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_blue_flash_times(uint32_t count, uint32_t times, uint32_t off_count);
+
+/*!
+    \brief      Flicking the blue part function
+    \param[in]  count: count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_blue_flick(uint32_t count);
+
+/*!
+    \brief      Flicking times the blue part of the RGB LED function
+    \param[in]  count: count in milliseconds
+    \param[in]  times: instances
+    \param[in]  off_count: off count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_blue_flick_times(uint32_t count, uint32_t times, uint32_t off_count);
+
+/*!
+    \brief      Turning on the blue part of the RGB LED function
     \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_led_1615_init();
+void sln2663_led_1615_blue_on();
+
+/*!
+    \brief      Turning off the blue part of the RGB LED function
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_blue_off();
+
+/*!   
+    \brief      Turning on and off the green part of the RGB LED function
+    \param[in]  count: count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_green_flash(uint32_t count);
+
+/*!
+    \brief      Flashing times the green part of the RGB LED function
+    \param[in]  count: count in milliseconds
+    \param[in]  times: instances
+    \param[in]  off_count: off count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_green_flash_times(uint32_t count, uint32_t times, uint32_t off_count);
+
+/*!
+    \brief      Flicking the green part function
+    \param[in]  count: count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_green_flick(uint32_t count);
+
+/*!
+    \brief      Flicking times the green part of the RGB LED function
+    \param[in]  count: count in milliseconds
+    \param[in]  times: instances
+    \param[in]  off_count: off count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_green_flick_times(uint32_t count, uint32_t times, uint32_t off_count);
+
+/*!
+    \brief      Turning on the green part of the RGB LED function
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_green_on();
+
+/*!
+    \brief      Turning off the green part of the RGB LED function
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_green_off();
 
 /*!   
     \brief      Turning on and off the red part of the RGB LED function
@@ -41,6 +137,14 @@ void sln2663_led_1615_init();
     \retval     none
 */
 void sln2663_led_1615_red_flash(uint32_t count);
+
+/*!
+    \brief      Initializer function of LED 1615.
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_1615_init();
 
 /*!
     \brief      Flashing times the red part of the RGB LED function

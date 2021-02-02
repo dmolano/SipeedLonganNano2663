@@ -28,12 +28,6 @@
 // ---------------------------------------------------------------------
 // Private Prototypes
 // ---------------------------------------------------------------------
-/*!
-    \brief      function
-    \param[in]  none
-    \param[out] none
-    \retval     system error
-*/
 
 // ---------------------------------------------------------------------
 // Public Bodies
@@ -44,15 +38,12 @@
     \param[out] none
     \retval     none
 */
-void sln2663_leds_init(sln2663_led_ptr leds_data)
+void sln2663_leds_init(sln2663_led_ptr *leds_data)
 {
-    while (leds_data != NULL)
+    while (*leds_data != NULL)
     {
-        sln2663_rcu_init(leds_data->periph);
-
-        leds_data->gpios_ptr->mode = GPIO_MODE_OUT_PP;
-        sln2663_gpios_init(leds_data->gpios_ptr);
-
+        sln2663_rcu_init((*leds_data)->periph);
+        sln2663_gpios_init((*leds_data)->gpios_ptr);
         leds_data++;
     }
 }

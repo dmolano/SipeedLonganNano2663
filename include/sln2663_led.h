@@ -34,7 +34,7 @@
 typedef struct
 {
     rcu_periph_enum periph;
-    sln2663_gpio_ptr gpios_ptr;
+    sln2663_gpio_ptr *gpios_ptr;
 } sln2663_led, *sln2663_led_ptr;
 
 /*!
@@ -55,7 +55,7 @@ typedef enum
     \param[out] none
     \retval     none
 */
-void sln2663_leds_init(sln2663_led_ptr leds_data);
+void sln2663_leds_init(sln2663_led_ptr *leds_data);
 
 /*!
     \brief      turn on led function
@@ -89,6 +89,19 @@ void sln2663_led_off(uint32_t port, uint32_t pin, electrode_type_enum electrode_
 void sln2663_led_flash(uint32_t port, uint32_t pin, electrode_type_enum electrode_type, uint32_t count);
 
 /*!
+    \brief      flashing led function
+    \param[in]  port
+    \param[in]  pin
+    \param[in]  electrode_type
+    \param[in]  count: count in milliseconds
+    \param[in]  times: instances
+    \param[in]  off_count: off count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_flash_times(uint32_t port, uint32_t pin, electrode_type_enum electrode_type, uint32_t count, uint32_t times, uint32_t off_count);
+
+/*!
     \brief      flickering led function
     \param[in]  port
     \param[in]  pin
@@ -99,4 +112,16 @@ void sln2663_led_flash(uint32_t port, uint32_t pin, electrode_type_enum electrod
 */
 void sln2663_led_flick(uint32_t port, uint32_t pin, electrode_type_enum electrode_type, uint32_t count);
 
+/*!
+    \brief      flashing led function
+    \param[in]  port
+    \param[in]  pin
+    \param[in]  electrode_type
+    \param[in]  count: count in milliseconds
+    \param[in]  times: instances
+    \param[in]  off_count: off count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void sln2663_led_flick_times(uint32_t port, uint32_t pin, electrode_type_enum electrode_type, uint32_t count, uint32_t times, uint32_t off_count);
 #endif // __SLN2663_LED_H

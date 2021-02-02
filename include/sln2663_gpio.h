@@ -46,6 +46,6 @@ typedef struct
     \param[out] none
     \retval     none
 */
-void sln2663_gpios_init(sln2663_gpio_ptr gpios_ptr);
+void sln2663_gpios_init(sln2663_gpio_ptr *gpios_ptr);
 
 #endif // __SLN2663_GPIO_H
