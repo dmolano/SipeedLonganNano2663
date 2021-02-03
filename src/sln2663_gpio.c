@@ -43,18 +43,3 @@ void sln2663_gpios_init(sln2663_gpio_ptr *gpios_ptr)
         gpios_ptr++;
     }
 }
-// /*!
-//     \brief      GPIO initialization function on the board LEDs (LED_1615).
-//     \param[in]  none.
-//     \param[out] none
-//     \retval     none
-// */
-// void sln2663_gpio_led_1615_init()
-// {
-//     gpio_init(RED_LED_1615_GPIO_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, RED_LED_1615_GPIO_PIN);
-//     gpio_init(GREEN_LED_1615_GPIO_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GREEN_LED_1615_GPIO_PIN);
-//     gpio_init(BLUE_LED_1615_GPIO_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, BLUE_LED_1615_GPIO_PIN);
-//     GPIO_BOP(RED_LED_1615_GPIO_PORT) = RED_LED_1615_GPIO_PIN;
-//     GPIO_BOP(GREEN_LED_1615_GPIO_PORT) = GREEN_LED_1615_GPIO_PIN;
-//     GPIO_BOP(BLUE_LED_1615_GPIO_PORT) = BLUE_LED_1615_GPIO_PIN;
-// }
