@@ -1,5 +1,5 @@
 /* 
- * This file is part of the Sipeed Longan Nano Skeleton. Reset and clock unit (RCU).
+ * This file is part of the Sipeed Longan Nano 2663 Skeleton.
  * Copyright (c) 2021 Dionisio Molano Robledo.
  * 
  * This program is free software: you can redistribute it and/or modify  
@@ -14,44 +14,21 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
-#include "sln2663_rcu.h"
-
-// ---------------------------------------------------------------------
-// Private Prototypes
-// ---------------------------------------------------------------------
+#ifndef __ST7735S_H
+#define __ST7735S_H
 
 // ---------------------------------------------------------------------
-// Public Bodies
+// Public Constants
+// ---------------------------------------------------------------------
+
+// ---------------------------------------------------------------------
+// Public Prototypes
 // ---------------------------------------------------------------------
 /*!
-    \brief      RCUs initialization function.
-    \param[in]  Pointer to a non-repeating list of rcu_periph_enum.
-                The list will end when two contiguous items are repeated.
+    \brief      function
+    \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_rcus_init(rcu_periph_enum *rcu_periph_ptr)
-{
-    if (rcu_periph_ptr != NULL)
-    {
-        rcu_periph_enum sentinel_node;
-        do
-        {
-            sentinel_node = *rcu_periph_ptr;
-            rcu_periph_clock_enable(*rcu_periph_ptr);
-            rcu_periph_ptr++;
-        } while (*rcu_periph_ptr != sentinel_node);
-    }
-}
 
-/*!
-    \brief      RCU initialization function.
-    \param[in]  rcu_periph a rcu_periph_enum.
-    \param[out] none
-    \retval     none
-*/
-void sln2663_rcu_init(rcu_periph_enum rcu_periph)
-{
-    rcu_periph_clock_enable(rcu_periph);
-}
+#endif // __ST7735S_H

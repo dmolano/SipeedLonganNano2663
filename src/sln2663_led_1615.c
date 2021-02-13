@@ -21,14 +21,13 @@
 // ---------------------------------------------------------------------
 // Private Constants
 // ---------------------------------------------------------------------
-#define LED_1615_RCU_COUNT 2
-#define SENTINEL_NODE_COUNT 1
-
 #define RED_LED_1615_RCU_PERIPH RCU_GPIOC
-#define GREEN_BLUE_LEDS_1615_RCU_PERIPH RCU_GPIOA
+#define GREEN_LED_1615_RCU_PERIPH RCU_GPIOA
+#define BLUE_LED_1615_RCU_PERIPH RCU_GPIOA
 
 #define RED_LED_1615_GPIO_PORT GPIOC
-#define GREEN_BLUE_LEDS_1615_GPIO_PORT GPIOA
+#define GREEN_LED_1615_GPIO_PORT GPIOA
+#define BLUE_LED_1615_GPIO_PORT GPIOA
 
 #define RED_LED_1615_GPIO_PIN GPIO_PIN_13
 #define GREEN_LED_1615_GPIO_PIN GPIO_PIN_1
@@ -53,7 +52,7 @@
 */
 void sln2663_led_1615_blue_flash(uint32_t count)
 {
-    sln2663_led_flash(GREEN_BLUE_LEDS_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
+    sln2663_led_flash(BLUE_LED_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
 }
 
 /*!
@@ -66,7 +65,7 @@ void sln2663_led_1615_blue_flash(uint32_t count)
 */
 void sln2663_led_1615_blue_flash_times(uint32_t count, uint32_t times, uint32_t off_count)
 {
-    sln2663_led_flash_times(GREEN_BLUE_LEDS_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
+    sln2663_led_flash_times(BLUE_LED_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
 }
 
 /*!
@@ -77,7 +76,7 @@ void sln2663_led_1615_blue_flash_times(uint32_t count, uint32_t times, uint32_t 
 */
 void sln2663_led_1615_blue_flick(uint32_t count)
 {
-    sln2663_led_flick(GREEN_BLUE_LEDS_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
+    sln2663_led_flick(BLUE_LED_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
 }
 
 /*!
@@ -90,7 +89,7 @@ void sln2663_led_1615_blue_flick(uint32_t count)
 */
 void sln2663_led_1615_blue_flick_times(uint32_t count, uint32_t times, uint32_t off_count)
 {
-    sln2663_led_flick_times(GREEN_BLUE_LEDS_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
+    sln2663_led_flick_times(BLUE_LED_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
 }
 
 /*!
@@ -101,7 +100,7 @@ void sln2663_led_1615_blue_flick_times(uint32_t count, uint32_t times, uint32_t 
 */
 void sln2663_led_1615_blue_on()
 {
-    sln2663_led_on(GREEN_BLUE_LEDS_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
+    sln2663_led_on(BLUE_LED_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
 }
 
 /*!
@@ -112,7 +111,7 @@ void sln2663_led_1615_blue_on()
 */
 void sln2663_led_1615_blue_off()
 {
-    sln2663_led_off(GREEN_BLUE_LEDS_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
+    sln2663_led_off(BLUE_LED_1615_GPIO_PORT, GREEN_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
 }
 
 /*!   
@@ -123,7 +122,7 @@ void sln2663_led_1615_blue_off()
 */
 void sln2663_led_1615_green_flash(uint32_t count)
 {
-    sln2663_led_flash(GREEN_BLUE_LEDS_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
+    sln2663_led_flash(GREEN_LED_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
 }
 
 /*!
@@ -136,7 +135,7 @@ void sln2663_led_1615_green_flash(uint32_t count)
 */
 void sln2663_led_1615_green_flash_times(uint32_t count, uint32_t times, uint32_t off_count)
 {
-    sln2663_led_flash_times(GREEN_BLUE_LEDS_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
+    sln2663_led_flash_times(GREEN_LED_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
 }
 
 /*!
@@ -147,7 +146,7 @@ void sln2663_led_1615_green_flash_times(uint32_t count, uint32_t times, uint32_t
 */
 void sln2663_led_1615_green_flick(uint32_t count)
 {
-    sln2663_led_flick(GREEN_BLUE_LEDS_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
+    sln2663_led_flick(GREEN_LED_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count);
 }
 
 /*!
@@ -160,7 +159,7 @@ void sln2663_led_1615_green_flick(uint32_t count)
 */
 void sln2663_led_1615_green_flick_times(uint32_t count, uint32_t times, uint32_t off_count)
 {
-    sln2663_led_flick_times(GREEN_BLUE_LEDS_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
+    sln2663_led_flick_times(GREEN_LED_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE, count, times, off_count);
 }
 
 /*!
@@ -171,7 +170,7 @@ void sln2663_led_1615_green_flick_times(uint32_t count, uint32_t times, uint32_t
 */
 void sln2663_led_1615_green_on()
 {
-    sln2663_led_on(GREEN_BLUE_LEDS_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
+    sln2663_led_on(GREEN_LED_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
 }
 
 /*!
@@ -182,7 +181,7 @@ void sln2663_led_1615_green_on()
 */
 void sln2663_led_1615_green_off()
 {
-    sln2663_led_off(GREEN_BLUE_LEDS_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
+    sln2663_led_off(GREEN_LED_1615_GPIO_PORT, BLUE_LED_1615_GPIO_PIN, LED_1615_ELECTRODE_TYPE);
 }
 
 /*!
@@ -193,18 +192,22 @@ void sln2663_led_1615_green_off()
 */
 void sln2663_led_1615_init()
 {
-    sln2663_gpio red_gpio = {RED_LED_1615_GPIO_PORT, GPIO_MODE_OUT_PP, LED_1615_FREQUENCY, RED_LED_1615_GPIO_PIN};
-    sln2663_gpio_ptr red_gpios_ptr[] = {&red_gpio, (sln2663_gpio_ptr)NULL};
-    sln2663_led red_led = {RED_LED_1615_RCU_PERIPH, red_gpios_ptr};
+    // RED LED_1615
+    sln2663_gpio_data_init red_led_1615_gpio = {RED_LED_1615_GPIO_PORT, GPIO_MODE_OUT_PP, LED_1615_FREQUENCY, RED_LED_1615_GPIO_PIN};
+    sln2663_rcu_gpio_data_init red_led_1615 = {RED_LED_1615_RCU_PERIPH, red_led_1615_gpio};
 
-    sln2663_gpio green_gpio = {GREEN_BLUE_LEDS_1615_GPIO_PORT, GPIO_MODE_OUT_PP, LED_1615_FREQUENCY, GREEN_LED_1615_GPIO_PIN};
-    sln2663_gpio blue_gpio = {GREEN_BLUE_LEDS_1615_GPIO_PORT, GPIO_MODE_OUT_PP, LED_1615_FREQUENCY, BLUE_LED_1615_GPIO_PIN};
-    sln2663_gpio_ptr green_blue_gpios_ptr[] = {&green_gpio, &blue_gpio, (sln2663_gpio_ptr)NULL};
+    // GREEN LED_1615
+    sln2663_gpio_data_init green_led_1615_gpio = {GREEN_LED_1615_GPIO_PORT, GPIO_MODE_OUT_PP, LED_1615_FREQUENCY, GREEN_LED_1615_GPIO_PIN};
+    sln2663_rcu_gpio_data_init green_led_1615 = {GREEN_LED_1615_RCU_PERIPH, green_led_1615_gpio};
 
-    sln2663_led green_blue_led = {GREEN_BLUE_LEDS_1615_RCU_PERIPH, green_blue_gpios_ptr};
-    sln2663_led_ptr leds_ptr[] = {&red_led, &green_blue_led, NULL};
+    // BLUE LED_1615
+    sln2663_gpio_data_init blue_led_1615_gpio = {BLUE_LED_1615_GPIO_PORT, GPIO_MODE_OUT_PP, LED_1615_FREQUENCY, BLUE_LED_1615_GPIO_PIN};
+    sln2663_rcu_gpio_data_init blue_led_1615 = {BLUE_LED_1615_RCU_PERIPH, blue_led_1615_gpio};
 
-    sln2663_leds_init(leds_ptr);
+    // LED_1615
+    sln2663_rcu_gpio_data_init_ptr led_1615_ptr[] = {&red_led_1615, &green_led_1615, &blue_led_1615, END_OF_RCU_GPIO_LIST};
+
+    sln2663_leds_init(led_1615_ptr);
 }
 
 /*!   

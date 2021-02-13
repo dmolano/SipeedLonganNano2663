@@ -19,6 +19,7 @@
 
 #include "sln2663_led_1615.h"
 #include "sln2663_time.h"
+#include "sln2663_tft_dma.h"
 
 // ---------------------------------------------------------------------
 // Private Constants
@@ -80,6 +81,8 @@ int main_init(sln2663_ptr sln_data_ptr)
 
     sln2663_led_1615_init();
 
+    // sln2663_tft_dma_init();
+
     return result;
 }
 
@@ -96,11 +99,11 @@ int main_loop(sln2663_ptr sln_data_ptr)
 
     while (condition == FOREVER)
     {
-        sln2663_led_1615_red_flash_times(ONE_SECOND_TIME/10, 3, ONE_SECOND_TIME/10);
+        sln2663_led_1615_red_flash_times(ONE_SECOND_TIME / 10, 2, ONE_SECOND_TIME / 10);
         sln2663_time_delay_ms(ONE_SECOND_TIME);
-        sln2663_led_1615_green_flash_times(ONE_SECOND_TIME/10, 3, ONE_SECOND_TIME/10);
+        sln2663_led_1615_green_flash_times(ONE_SECOND_TIME / 10, 2, ONE_SECOND_TIME / 10);
         sln2663_time_delay_ms(ONE_SECOND_TIME);
-        sln2663_led_1615_blue_flash_times(ONE_SECOND_TIME/10, 3, ONE_SECOND_TIME/10);
+        sln2663_led_1615_blue_flash_times(ONE_SECOND_TIME / 10, 2, ONE_SECOND_TIME / 10);
         sln2663_time_delay_ms(ONE_SECOND_TIME);
     }
     return result;

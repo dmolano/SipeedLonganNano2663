@@ -29,18 +29,9 @@
 // Public Structures
 // ---------------------------------------------------------------------
 /*!
-    \brief      LED info struct
-*/
-typedef struct
-{
-    rcu_periph_enum periph;
-    sln2663_gpio_ptr *gpios_ptr;
-} sln2663_led, *sln2663_led_ptr;
-
-/*!
     \brief      Configuration of the PIN electrode.
 */
-typedef enum
+typedef enum Electrode_Type_Enum
 {
     ANODE,
     CATHODE
@@ -55,7 +46,7 @@ typedef enum
     \param[out] none
     \retval     none
 */
-void sln2663_leds_init(sln2663_led_ptr *leds_data);
+void sln2663_leds_init(sln2663_rcu_gpio_data_init_ptr *leds_data);
 
 /*!
     \brief      turn on led function

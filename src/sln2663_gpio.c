@@ -16,30 +16,108 @@
  */
 
 #include "sln2663_gpio.h"
+#include "sln2663_rcu.h"
 
 // ---------------------------------------------------------------------
 // Private Constants
 // ---------------------------------------------------------------------
-
+#define RCU_NOT_FOUND NULL
 // ---------------------------------------------------------------------
 // Private Prototypes
 // ---------------------------------------------------------------------
+/*!
+    \brief      GPIO initialization function.
+    \param[in]  rcus_gpios_data_init_ptr
+    \param[out] none
+    \retval     none
+*/
+void sln2663_gpio_init(sln2663_rcu_gpio_data_init_ptr rcus_gpios_data_init_ptr, sln2663_rcu_gpio_data_init_ptr *found_rcu);
+
+/*!
+    \brief      Locate an RCU in the GPIO entity list.
+    \param[in]  rcus_gpios_data_init_ptr
+    \param[out] none
+    \retval     none
+*/
+sln2663_rcu_gpio_data_init_ptr *sln2663_gpio_find_rcu(sln2663_rcu_gpio_data_init_ptr *first_rcus_gpios_data_init_ptr,
+                                                      sln2663_rcu_gpio_data_init_ptr *current_rcus_gpios_data_init_ptr);
 
 // ---------------------------------------------------------------------
 // Public Bodies
 // ---------------------------------------------------------------------
 /*!
     \brief      GPIOs initialization function.
-    \param[in]  gpios_ptr
+    \param[in]  rcus_gpios_data_init_ptr
     \param[out] none
     \retval     none
 */
-void sln2663_gpios_init(sln2663_gpio_ptr *gpios_ptr)
+void sln2663_gpios_init(sln2663_rcu_gpio_data_init_ptr *rcus_gpios_data_init_ptr)
 {
-    while (*gpios_ptr != NULL)
+    if (rcus_gpios_data_init_ptr != END_OF_RCU_GPIO_LIST)
     {
-        gpio_init((*gpios_ptr)->port, (*gpios_ptr)->mode, (*gpios_ptr)->frequency, (*gpios_ptr)->pin);
-        GPIO_BOP((*gpios_ptr)->port) = (*gpios_ptr)->pin;
-        gpios_ptr++;
+        sln2663_rcu_gpio_data_init_ptr *first_rcu_gpio_data_init_ptr;
+
+        first_rcu_gpio_data_init_ptr = rcus_gpios_data_init_ptr;
+        // The first time we should not try to locate a previous initialized RCU.
+        sln2663_gpio_init(*rcus_gpios_data_init_ptr, RCU_NOT_FOUND);
+        rcus_gpios_data_init_ptr++;
+        while (*rcus_gpios_data_init_ptr != END_OF_RCU_GPIO_LIST)
+        {
+            sln2663_gpio_init(*rcus_gpios_data_init_ptr, sln2663_gpio_find_rcu(first_rcu_gpio_data_init_ptr, rcus_gpios_data_init_ptr));
+            rcus_gpios_data_init_ptr++;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------
+// Private Bodies
+// ---------------------------------------------------------------------
+/*!
+    \brief      Locate an RCU in the GPIO entity list.
+    \param[in]  rcus_gpios_data_init_ptr
+    \param[out] none
+    \retval     none
+*/
+sln2663_rcu_gpio_data_init_ptr *sln2663_gpio_find_rcu(sln2663_rcu_gpio_data_init_ptr *first_rcus_gpios_data_init_ptr, sln2663_rcu_gpio_data_init_ptr *current_rcus_gpios_data_init_ptr)
+{
+    sln2663_rcu_gpio_data_init_ptr *result;
+
+    result = RCU_NOT_FOUND;
+
+    while ((first_rcus_gpios_data_init_ptr != END_OF_RCU_GPIO_LIST) &&
+           (first_rcus_gpios_data_init_ptr < current_rcus_gpios_data_init_ptr))
+    {
+        if ((*first_rcus_gpios_data_init_ptr)->rcu_periph_enable == (*current_rcus_gpios_data_init_ptr)->rcu_periph_enable)
+        {
+            result = first_rcus_gpios_data_init_ptr;
+            // RCU found.
+            break;
+        }
+        first_rcus_gpios_data_init_ptr++;
+    }
+
+    return result;
+}
+
+/*!
+    \brief      GPIO initialization function.
+    \param[in]  rcus_gpios_data_init_ptr
+    \param[in]  found_rcu
+    \param[out] none
+    \retval     none
+*/
+void sln2663_gpio_init(sln2663_rcu_gpio_data_init_ptr rcus_gpios_data_init_ptr, sln2663_rcu_gpio_data_init_ptr *found_rcu)
+{
+    if (rcus_gpios_data_init_ptr != END_OF_RCU_GPIO_LIST)
+    {
+        if (found_rcu == RCU_NOT_FOUND)
+        {
+            sln2663_rcu_init(rcus_gpios_data_init_ptr->rcu_periph_enable);
+        }
+        gpio_init(rcus_gpios_data_init_ptr->gpio_data_init.port,
+                  rcus_gpios_data_init_ptr->gpio_data_init.mode,
+                  rcus_gpios_data_init_ptr->gpio_data_init.frequency,
+                  rcus_gpios_data_init_ptr->gpio_data_init.pin);
+        GPIO_BOP(rcus_gpios_data_init_ptr->gpio_data_init.port) = rcus_gpios_data_init_ptr->gpio_data_init.pin;
     }
 }

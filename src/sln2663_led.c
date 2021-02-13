@@ -17,7 +17,6 @@
 
 #include "sln2663_led.h"
 
-#include "sln2663_rcu.h"
 #include "sln2663_gpio.h"
 #include "sln2663_time.h"
 
@@ -38,14 +37,9 @@
     \param[out] none
     \retval     none
 */
-void sln2663_leds_init(sln2663_led_ptr *leds_data)
+void sln2663_leds_init(sln2663_rcu_gpio_data_init_ptr *leds_data)
 {
-    while (*leds_data != NULL)
-    {
-        sln2663_rcu_init((*leds_data)->periph);
-        sln2663_gpios_init((*leds_data)->gpios_ptr);
-        leds_data++;
-    }
+    sln2663_gpios_init(leds_data);
 }
 
 /*!

@@ -1,5 +1,5 @@
 /* 
- * This file is part of the Sipeed Longan Nano Skeleton. General-purpose and alternate-function I/Os (GPIO and AFIO)
+ * This file is part of the Sipeed Longan Nano 2663 Skeleton.
  * Copyright (c) 2021 Dionisio Molano Robledo.
  * 
  * This program is free software: you can redistribute it and/or modify  
@@ -14,47 +14,39 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "gd32vf103.h"
 
-#ifndef __SLN2663_GPIO_H
-#define __SLN2663_GPIO_H
+#include "st7735s.h"
 
 // ---------------------------------------------------------------------
-// Public Constants
+// Private Constants
 // ---------------------------------------------------------------------
-#define END_OF_RCU_GPIO_LIST NULL
+
 // ---------------------------------------------------------------------
-// Public Structures
+// Private Prototypes
 // ---------------------------------------------------------------------
 /*!
-    \brief      GPIO data init struct
+    \brief      function
+    \param[in]  none
+    \param[out] none
+    \retval     system error
 */
-typedef struct SLN2663_GPIO_INIT
-{
-    uint32_t port;
-    uint32_t mode;
-    uint32_t frequency;
-    uint32_t pin;
-} sln2663_gpio_data_init, *sln2663_gpio_data_init_ptr;
-
-/*!
-    \brief      RCUs & GPIOs data init struct
-*/
-typedef struct SLN2663_RCU_GPIO_DATA_INIT
-{
-    rcu_periph_enum rcu_periph_enable;
-    sln2663_gpio_data_init gpio_data_init;
-} sln2663_rcu_gpio_data_init, *sln2663_rcu_gpio_data_init_ptr;
 
 // ---------------------------------------------------------------------
-// Public Prototypes
+// Public Bodies
 // ---------------------------------------------------------------------
 /*!
-    \brief      GPIOs initialization function.
-    \param[in]  rcus_gpios_data_init_ptr
+    \brief      main function
+    \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_gpios_init(sln2663_rcu_gpio_data_init_ptr *rcus_gpios_data_init_ptr);
 
-#endif // __SLN2663_GPIO_H
+// ---------------------------------------------------------------------
+// Private Bodies
+// ---------------------------------------------------------------------
+/*!
+    \brief      main function
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
