@@ -20,17 +20,42 @@
 // ---------------------------------------------------------------------
 // Private Constants
 // ---------------------------------------------------------------------
+#define DMA0_RCU_PERIPH RCU_DMA0
 
 // ---------------------------------------------------------------------
 // Private Prototypes
 // ---------------------------------------------------------------------
+/*!
+    \brief      Deinit function with DMA.
+    \param[in]  spi_periph: SPIx(x=0,1,2)
+    \param[out] none
+    \retval     none
+*/
+uint32_t sln2663_tft_dma_configure_init(uint32_t spi_periph);
+
+/*!
+    \brief      Deinit function with DMA.
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+uint32_t sln2663_tft_dma_deinit_init();
+
 /*!
     \brief      RCU initializer function with DMA.
     \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_tft_dma_rcu_init();
+uint32_t sln2663_tft_dma_rcu_init();
+
+/*!
+    \brief      RCU & GPIO initializer function with DMA.
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+uint32_t sln2663_tft_dma_rcu_gpio_init();
 
 // ---------------------------------------------------------------------
 // Public Bodies
@@ -41,33 +66,67 @@ void sln2663_tft_dma_rcu_init();
     \param[out] none
     \retval     none
 */
-void sln2663_tft_dma_init() {
-    // sln2663_tft_dma_rcu_gpio_init();
-    // sln2663_tft_dma_gpio_init();
-    // sln2663_tft_disable();
-    // sln2663_time_delay_ms(TFT_DISABLE_WAIT_MS);
-    // sln2663_tft_reset();
-    // sln2663_time_delay_ms(TFT_RESET_WAIT_MS);
-    // sln2663_tft_spi_dma_init();
-    // sln2663_tft_enable();
-    // sln2663_tft_lcd_init();
-    // sln2663_tft_lcd_clear();
-    // sln2663_tft_structure_init();
+void sln2663_tft_dma_init()
+{
+    sln2663_tft_init(sln2663_tft_dma_rcu_init, sln2663_tft_dma_rcu_gpio_init, sln2663_tft_dma_deinit_init, sln2663_tft_dma_configure_init);
 }
 
 // ---------------------------------------------------------------------
 // Private Bodies
 // ---------------------------------------------------------------------
 /*!
+    \brief      Deinit function with DMA.
+    \param[in]  spi_periph: SPIx(x=0,1,2)
+    \param[out] none
+    \retval     none
+*/
+uint32_t sln2663_tft_dma_configure_init(uint32_t spi_periph)
+{
+    DMA_CHCTL(DMA0, DMA_CH1) = (uint32_t)(DMA_PRIORITY_ULTRA_HIGH | DMA_CHXCTL_MNAGA); // Receive.
+    DMA_CHCTL(DMA0, DMA_CH2) = (uint32_t)(DMA_PRIORITY_ULTRA_HIGH | DMA_CHXCTL_DIR);   // Transmit.
+    DMA_CHPADDR(DMA0, DMA_CH1) = (uint32_t)&SPI_DATA(spi_periph);
+    DMA_CHPADDR(DMA0, DMA_CH2) = (uint32_t)&SPI_DATA(spi_periph);
+    return NO_ERROR_INIT_SLN2663;
+}
+
+/*!
+    \brief      Deinit function with DMA.
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+uint32_t sln2663_tft_dma_deinit_init()
+{
+    dma_deinit(DMA0, DMA_CH1);
+    dma_deinit(DMA0, DMA_CH2);
+    return NO_ERROR_INIT_SLN2663;
+}
+
+/*!
+    \brief      RCU initializer function with DMA.
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+uint32_t sln2663_tft_dma_rcu_init()
+{
+    // DMA0
+    rcu_periph_enum dma0_tft = {DMA0_RCU_PERIPH};
+    // DMAs
+    rcu_periph_enum_ptr dmas_tft[] = {&dma0_tft, END_OF_RCU_LIST};
+
+    sln2663_rcus_init(dmas_tft);
+    return NO_ERROR_INIT_SLN2663;
+}
+
+/*!
     \brief      RCU & GPIO initializer function with DMA.
     \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_tft_dma_rcu_gpio_init() {
-    // sln2663_tft_init dma_tft = {RCU_DMA0, NULL};
-    // sln2663_tft_init_ptr dma_ptr[] = {&dma_tft, NULL};
-
-    // sln2663_tft_rcu_gpio_init(dma_ptr);
+uint32_t sln2663_tft_dma_rcu_gpio_init()
+{
+    return NO_ERROR_INIT_SLN2663;
 }
 

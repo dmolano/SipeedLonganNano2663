@@ -22,6 +22,15 @@
 // ---------------------------------------------------------------------
 // Public Constants
 // ---------------------------------------------------------------------
+#define END_OF_RCU_LIST NULL
+
+// ---------------------------------------------------------------------
+// Public Structures
+// ---------------------------------------------------------------------
+/*!
+    \brief      RCUs & GPIOs data init struct
+*/
+typedef rcu_periph_enum *rcu_periph_enum_ptr;
 
 // ---------------------------------------------------------------------
 // Public Prototypes
@@ -34,7 +43,7 @@
     \param[out] none
     \retval     none
 */
-void sln2663_rcus_init(rcu_periph_enum *rcu_periph);
+void sln2663_rcus_init(rcu_periph_enum_ptr *rcu_periph_ptr);
 
 /*!
     \brief      RCU initialization function.

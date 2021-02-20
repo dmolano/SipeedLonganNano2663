@@ -15,8 +15,11 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "gd32vf103.h"
+
+#include "sln2663.h"
 #include "sln2663_rcu.h"
 #include "sln2663_gpio.h"
+#include "sln2663_time.h"
 
 #ifndef __SLN2663_TFT_H
 #define __SLN2663_TFT_H
@@ -33,11 +36,29 @@
 // Public Prototypes
 // ---------------------------------------------------------------------
 /*!
-    \brief      Initializing function of TFT device.
-    \param[in]  rcus_gpios_data_init_ptr : Pointer to the data of the init TFT.
+    \brief      Disabling function of TFT device.
+    \param[in]  none
     \param[out] none
     \retval     none
 */
-void sln2663_tft_rcu_gpio_init(sln2663_rcu_gpio_data_init_ptr *rcus_gpios_data_init_ptr);
+void sln2663_tft_disable();
 
+/*!
+    \brief      Enabling function of TFT device.
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void sln2663_tft_enable();
+
+/*!
+    \brief      Initializing function of TFT device.
+    \param[in]  extern_rcu_init
+    \param[in]  extern_rcu_gpio_init
+    \param[in]  extern_deinit_init
+    \param[in]  extern_configure_init
+    \param[out] none
+    \retval     none
+*/
+void sln2663_tft_init(uint32_t (*extern_rcu_init)(), uint32_t (*extern_rcu_gpio_init)(), uint32_t (*extern_deinit_init)(), uint32_t (*extern_configure_init)(uint32_t));
 #endif // __SLN2663_TFT_H

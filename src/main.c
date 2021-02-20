@@ -17,6 +17,7 @@
 
 #include "main.h"
 
+#include "sln2663.h"
 #include "sln2663_led_1615.h"
 #include "sln2663_time.h"
 #include "sln2663_tft_dma.h"
@@ -24,8 +25,6 @@
 // ---------------------------------------------------------------------
 // Private Constants
 // ---------------------------------------------------------------------
-#define NO_ERROR_INIT_SLN2663 0
-
 #define FOREVER 1
 
 // ---------------------------------------------------------------------
@@ -71,7 +70,7 @@ int main(void)
 
 /*!
     \brief      init function
-    \param[in]  sipeed_longan_nano Sipeed Longan Nano data
+    \param[in]  sln_data_ptr Sipeed Longan Nano data
     \param[out] none
     \retval     system error
 */
@@ -80,9 +79,7 @@ int main_init(sln2663_ptr sln_data_ptr)
     int result = NO_ERROR_INIT_SLN2663;
 
     sln2663_led_1615_init();
-
-    // sln2663_tft_dma_init();
-
+    sln2663_lcd_module_init(lh096t_ig01_init);
     return result;
 }
 
